@@ -10,7 +10,15 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends(
+      "next/core-web-vitals",
+      "next/typescript",
+      {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
+      {languageOptions: { globals: globals.browser }},
+      pluginJs.configs.recommended,
+      ...tseslint.configs.recommended,
+      pluginReact.configs.flat.recommended,
+    ),
 ];
 
 export default eslintConfig;
